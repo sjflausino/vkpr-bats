@@ -52,6 +52,6 @@ teardown() {
   export RESPONSE=teste
 
   run echo $RESPONSE
-  assert_output "teste"
+  assert_output "testrqwee"
   assert_success
 }
