@@ -1,0 +1,85 @@
+global:
+  enabled: true
+  tlsDisable: true
+injector:
+  enabled: true
+server:
+  extraLabels:
+    app.kubernetes.io/managed-by: vkpr
+  volumes:
+    - name: vault-storage-config
+      secret:
+        secretName: vault-storage-config
+  volumeMounts:
+    - name: vault-storage-config
+      mountPath: /vault/userconfig/vault-storage-config
+      readOnly: true
+  extraArgs: "-config=/vault/userconfig/vault-storage-config/config.hcl"
+  ha:
+    raft:
+      enabled: false 
+      config: |
+        ui = true
+
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+
+          telemetry {
+            unauthenticated_metrics_access =  true
+          }
+        }
+
+        telemetry {
+          prometheus_retention_time = "30s"
+          disable_hostname = true
+        }
+
+        service_registration "kubernetes" {}
+    enabled: true
+    replicas: 3
+    config: |
+      ui = true
+
+      listener "tcp" {
+        tls_disable = 1
+        address = "[::]:8200"
+        cluster_address = "[::]:8201"
+
+        telemetry {
+          unauthenticated_metrics_access =  true
+        }
+      }
+
+      telemetry {
+        prometheus_retention_time = "30s"
+        disable_hostname = true
+      }
+
+      service_registration "kubernetes" {}
+    disruptionBudget:
+      maxUnavailable: 1
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: "kubernetes.io/hostname"
+        whenUnsatisfiable: "ScheduleAnyway"
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/managed-by: vkpr
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - host: vault.localhost
+        path: /
+  dataStorage:
+    enabled: true
+    size: 1Gi
+  auditStorage:
+    enabled: true
+    size: 1Gi
+  standalone:
+    enabled: false
+ui:
+  enabled: true

@@ -1,0 +1,5 @@
+controller:
+  labels:
+    app.kubernetes.io/managed-by: vkpr
+rbac:
+  create: true

@@ -1,0 +1,4 @@
+{
+  "short": "Manage whoami",
+  "long": "Whoami is a Tiny Go webserver that prints OS information and HTTP request to output"
+}

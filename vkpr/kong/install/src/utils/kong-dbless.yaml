@@ -1,0 +1,75 @@
+# -----------------------------------------------------------------------------
+# Kong parameters
+env:
+  database: "off"
+  log_level: notice
+  admin_gui_url: "http://manager.localhost:8000"
+  admin_api_uri: "http://manager.localhost:8000/api"
+  proxy_url: "http://localhost:8000"
+image:
+  repository: kong/kong-gateway
+  tag: "3.2.2.1-amazonlinux-2022"
+admin:
+  enabled: true
+  type: ClusterIP
+  annotations:
+    konghq.com/plugins: kong-admin-basicauth
+  http:
+    enabled: true
+    servicePort: 8001
+    containerPort: 8001
+  ingress:
+    enabled: true
+    annotations:
+      konghq.com/strip-path: true
+    hostname: manager.localhost
+    ingressClassName: "kong"
+    path: /api
+  tls:
+    enabled: false
+proxy:
+  enabled: true
+  type: LoadBalancer
+  http:
+    enabled: true
+    servicePort: 80
+    containerPort: 8000
+  tls:
+    enabled: true
+    servicePort: 443
+    containerPort: 8443
+# -----------------------------------------------------------------------------
+# Ingress Controller parameters
+# -----------------------------------------------------------------------------
+ingressController:
+  enabled: true
+  installCRDs: false
+  env:
+    kong_admin_tls_skip_verify: true
+  ingressClass: kong
+  rbac:
+    create: true
+# -----------------------------------------------------------------------------
+# Kong Enterprise parameters
+# -----------------------------------------------------------------------------
+enterprise:
+  enabled: true
+  license_secret: "kong-enterprise-license"
+manager:
+  enabled: true
+  type: ClusterIP
+  http:
+    enabled: true
+    servicePort: 8002
+    containerPort: 8002
+  ingress:
+    enabled: true
+    hostname: manager.localhost
+    ingressClassName: "kong"
+    path: /
+  tls:
+    enabled: false
+portal:
+  enabled: false
+portalapi:
+  enabled: false

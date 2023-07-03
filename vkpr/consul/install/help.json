@@ -1,0 +1,4 @@
+{
+  "short": "Install Consul",
+  "long": "Install the Consul in the Kubernetes cluster"
+}

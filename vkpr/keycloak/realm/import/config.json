@@ -1,0 +1,24 @@
+{
+  "inputs": [
+    {
+      "tutorial": "Specifies the path to file",
+      "label": "Type the realm path:",
+      "name": "realm_path",
+      "type": "text"
+    },
+    {
+      "tutorial": "Specifies the Keycloak Super admin username",
+      "label": "Type the keycloak super admin username:",
+      "name": "keycloak_username",
+      "type": "text"
+    },
+    {
+      "tutorial": "Specifies the Keycloak Super admin password",
+      "label": "Type the keycloak super admin password:",
+      "name": "keycloak_password",
+      "type": "password"
+    }
+  ],
+  "template": "shell-bat",
+  "templateRelease": "2.17.0"
+}

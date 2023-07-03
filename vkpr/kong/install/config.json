@@ -1,0 +1,132 @@
+{
+  "inputs": [
+    {
+      "tutorial": "Specifies the domain to use in the application",
+      "label": "Type the Kong domain:",
+      "name": "domain",
+      "type": "text",
+      "default": "localhost"
+    },
+    {
+      "tutorial": "Specifies if the application will have HTTPS",
+      "label": "Secure ?",
+      "name": "secure",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "tutorial": "Specifies the type of Kong Deployment",
+      "label": "Kong Mode: (Hybrid only available in Kong Enterprise)",
+      "name": "mode",
+      "type": "text",
+      "default": "dbless",
+      "items": [
+        "dbless",
+        "standard",
+        "hybrid"
+      ]
+    },
+    {
+      "tutorial": "Specifies the Plane to install on Hybrid Mode",
+      "condition": {
+        "variable": "mode",
+        "operator": "==",
+        "value": "hybrid"
+      },
+      "label": "Select the plane to install",
+      "name": "plane",
+      "type": "text",
+      "default": "control",
+      "items": [
+        "control",
+        "data"
+      ]
+    },
+    {
+      "tutorial": "Specifies which Kong CP to point at",
+      "condition": {
+        "variable": "plane",
+        "operator": "==",
+        "value": "data"
+      },
+      "label": "Kong Control Plane",
+      "name": "cp_url",
+      "type": "text",
+      "default": "kong-kong-cluster.vkpr.svc.cluster.local:8005"
+    },
+    {
+      "tutorial": "Specifies which telemetry endpoint to point at",
+      "condition": {
+        "variable": "plane",
+        "operator": "==",
+        "value": "data"
+      },
+      "label": "Kong Telemetry Endpoint",
+      "name": "telemetry_url",
+      "type": "text",
+      "default": "kong-kong-clustertelemetry.vkpr.svc.cluster.local:8006"
+    },
+    {
+      "tutorial": "Specifies the Kong Enterprise License path",
+      "label": "Type the full path to the license:",
+      "name": "license",
+      "type": "text",
+      "default": "null",
+      "cache": {
+        "active": true,
+        "qty": 2,
+        "newLabel": "Type another license path: "
+      }
+    },
+    {
+      "tutorial": "Specifies the RBAC Super Admin Password. Has no effect on hybrid data plane installations.",
+      "label": "Type the RBAC Admin Password. Has no effect on hybrid data plane installations:",
+      "name": "rbac_password",
+      "type": "text",
+      "default": "vkpr123"
+    },
+    {
+      "tutorial": "Specifies if the application will have High Availability",
+      "label": "HA ?",
+      "name": "HA",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "tutorial": "Simulate an install",
+      "label": "Dry-run ?",
+      "name": "dry_run",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {      
+      "label": "Diff ?",
+      "condition": {
+        "variable": "dry_run",
+        "operator": "==",
+        "value": "false"
+      },
+      "name": "diff",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    }
+  ],
+  "template": "shell-bat",
+  "templateRelease:": "2.16.2"
+}

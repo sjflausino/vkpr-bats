@@ -1,0 +1,36 @@
+global:
+  datacenter: vkpr-dc1
+  gossipEncryption:
+    autoGenerate: true
+server:
+  enabled: true
+  replicas: 3
+  extraConfig: |
+    {
+      "performance": {
+        "raft_multiplier": 1
+      }
+    }
+  extraLabels:
+    app.kubernetes.io/managed-by: vkpr
+  topologySpreadConstraints: |
+    - maxSkew: 1 
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/managed-by: "vkpr"
+  disruptionBudget:
+    enabled: true
+    maxUnavailable: 1
+ui:
+  enabled: true
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    annotations: |
+      kubernetes.io/tls-acme: true
+    hosts:
+      - paths:
+          - /

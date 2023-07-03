@@ -1,0 +1,56 @@
+{
+  "inputs": [
+    {
+      "tutorial": "Specifies the HTTP listening port from the Cluster",
+      "label": "Type the HTTP listening port:",
+      "name": "http_port",
+      "type": "text",
+      "default": "8000"
+    },
+    {
+      "tutorial": "Specifies the HTTPS listening port from the Cluster",
+      "label": "Type the HTTPS listening port:",
+      "name": "https_port",
+      "type": "text",
+      "default": "8001"
+    },
+    {
+      "tutorial": "Specifies the quantity of Worker nodes",
+      "label": "Type the quantity of Worker Nodes:",
+      "name": "worker_nodes",
+      "type": "text",
+      "default": "1"
+    },
+    {
+      "tutorial": "Enable mount of volumes in cluster",
+      "label": "Enable Volume Mount ?",
+      "name": "enable_volume",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "tutorial": "Enable Traefik by default in Cluster",
+      "label": "Enable Traefik ingress controller ?",
+      "name": "enable_traefik",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "tutorial": "Specifies the number of nodeports to be exposed",
+      "label": "How many nodeports ?",
+      "name": "nodeports",
+      "type": "text",
+      "default": "0"
+    }
+  ],
+  "template": "shell-bat",
+  "templateRelease:": "2.16.2"
+}

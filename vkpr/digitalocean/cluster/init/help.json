@@ -1,0 +1,4 @@
+{
+  "short": "Build Digital Ocean with Gitops",
+  "long": "Build the terraform module in your Gitlab CI Pipeline forked by a Digital Ocean project"
+}

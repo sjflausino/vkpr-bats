@@ -1,0 +1,7 @@
+ingress:
+  enabled: true
+  hosts:
+    - paths: ["/"]
+  pathType: Prefix
+podLabels:
+  app.kubernetes.io/managed-by: vkpr

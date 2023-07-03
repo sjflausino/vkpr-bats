@@ -1,0 +1,10 @@
+global:
+  podLabels:
+    app.kubernetes.io/managed-by: vkpr
+server:
+  ingress:
+    enabled: true
+  extraArgs:
+    - --insecure
+notifications:
+  enabled: false

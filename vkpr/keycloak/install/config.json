@@ -1,0 +1,110 @@
+{
+  "inputs": [
+    {
+      "tutorial": "Specifies the domain to use in the application",
+      "label": "Type the Keycloak domain:",
+      "name": "domain",
+      "type": "text",
+      "default": "localhost"
+    },
+    {
+      "tutorial": "Specifies if the application will have HTTPS",
+      "label": "Secure ?",
+      "name": "secure",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "tutorial": "Specifies the Super Admin username",
+      "label": "Type the Admin username:",
+      "name": "admin_user",
+      "type": "text",
+      "default": "admin"
+    },
+    {
+      "tutorial": "Specifies the Super Admin password",
+      "label": "Type the Admin password:",
+      "name": "admin_password",
+      "type": "password",
+      "default": "vkpr123",
+      "pattern": {
+        "regex": "^([A-Za-z0-9-]{7,})$",
+        "mismatchText": "Password too weak"
+      }
+    },
+    {
+      "tutorial": "Specifies if the application will have High Availability",
+      "label": "HA ?",
+      "name": "HA",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "tutorial": "Specifies if the keycloak will be using internal SSL certificates.",
+      "label": "Will you use SSL?",
+      "name": "ssl",
+      "type": "bool",
+      "default": "false",
+      "required": true,
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "tutorial": "Specifies the keycloak .crt file path.",
+      "condition": {
+        "variable": "ssl",
+        "operator": "==",
+        "value": "true"
+      },
+      "label": "Type the full path to the .crt file:",
+      "name": "crt_file",
+      "type": "text",
+      "default": "",
+      "cache": {
+        "active": true,
+        "qty": 2,
+        "newLabel": "Type another .crt file path: "
+      }
+    },
+    {
+      "tutorial": "Specifies the keycloak .key file path.",
+      "condition": {
+        "variable": "ssl",
+        "operator": "==",
+        "value": "true"
+      },
+      "label": "Type the full path to the .key file:",
+      "name": "key_file",
+      "type": "text",
+      "default": "",
+      "cache": {
+        "active": true,
+        "qty": 2,
+        "newLabel": "Type another .key file path: "
+      }
+    },
+    {
+      "tutorial": "Simulate an install",
+      "label": "Dry-run ?",
+      "name": "dry_run",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    }
+  ],
+  "template": "shell-bat",
+  "templateRelease:": "2.16.2"
+}

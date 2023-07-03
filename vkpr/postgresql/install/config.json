@@ -1,0 +1,48 @@
+{
+  "inputs": [
+    {
+      "tutorial": "Specifies if the application will have High Availability",
+      "label": "HA ?",
+      "name": "HA",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "tutorial": "Simulate an install",
+      "label": "Dry-run ?",
+      "name": "dry_run",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {      
+      "label": "Diff ?",
+      "condition": {
+        "variable": "dry_run",
+        "operator": "==",
+        "value": "false"
+      },
+      "name": "diff",
+      "type": "bool",
+      "default": "false",
+      "items": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "tutorial": "Specifies the Postgresql password",
+      "name": "password",
+      "type": "CREDENTIAL_POSTGRES_PASSWORD"
+    }
+  ],
+  "template": "shell-bat",
+  "templateRelease:": "2.16.2"
+}
